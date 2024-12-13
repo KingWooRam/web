@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
-import './styles/Box.css';
 
 function Box({ item }) {
-  const blankCount = (item.text.match(/________/g) || []).length;
-  const [fields, setFields] = useState(Array(blankCount).fill(''));
+  const blanks = (item.text.match(/________/g) || []).length;
+  const [answers, setAnswers] = useState(Array(blanks).fill(''));
   const [editable, setEditable] = useState(true);
   const [correct, setCorrect] = useState(null);
 
-  const updateField = (e, index) => {
-    const nextFields = [...fields];
-    nextFields[index] = e.target.value;
-    setFields(nextFields);
+  const updateAns = (e, idx) => {
+    const updated = [...answers];
+    updated[idx] = e.target.value;
+    setAnswers(updated);
   };
 
-  const save = () => {
-    if (fields.some(f => f.trim() === '')) {
-      alert('모든 빈칸에 답변을 입력하세요!');
+  const saveAns = () => {
+    if (answers.some((ans) => ans.trim() === '')) {
+      alert('모든 빈칸에 답을 입력하세요!');
       return;
     }
 
-    const allMatch = fields.every((f, i) => f.trim() === item.correctAnswers[i]);
-    setCorrect(allMatch);
+    const allCorrect = answers.every(
+      (ans, idx) => ans.trim() === item.correctAnswers[idx]
+    );
+    setCorrect(allCorrect);
     setEditable(false);
   };
 
-  const edit = () => {
+  const editAns = () => {
     setEditable(true);
     setCorrect(null);
   };
@@ -33,23 +34,25 @@ function Box({ item }) {
     const parts = text.split('________');
     const elements = [];
 
-    parts.forEach((part, i) => {
+    parts.forEach((part, idx) => {
       elements.push(part);
-      if (i < blankCount) {
+      if (idx < blanks) {
         if (editable) {
           elements.push(
             <input
-              key={`input-${i}`}
+              key={`input-${idx}`}
               type="text"
-              value={fields[i]}
-              onChange={(e) => updateField(e, i)}
-              className="question-input"
+              value={answers[idx]}
+              onChange={(e) => updateAns(e, idx)}
+              className="input-field"
               placeholder="답 입력"
             />
           );
         } else {
           elements.push(
-            <span key={`answer-${i}`} className="question-input">{fields[i]}</span>
+            <span key={`answer-${idx}`} className="input-field">
+              {answers[idx]}
+            </span>
           );
         }
       }
@@ -59,21 +62,25 @@ function Box({ item }) {
   };
 
   return (
-    <div className="question-box">
-      <div className="question-body">
-        <div className="question-image-area">
-          <img src={item.imageSrc} alt="activity" className="question-img" />
+    <div className="quiz-item">
+      <div className="quiz-content">
+        <div className="image-area">
+          <img src={item.imageSrc} alt="활동 이미지" />
         </div>
-        <div className="question-form">
-          <p className="question-text">{renderFields(item.text)}</p>
-          <div className="question-actions">
+        <div className="form-area">
+          <p className="text-area">{renderFields(item.text)}</p>
+          <div className="action-buttons">
             {editable ? (
-              <button className="btn btn-save" onClick={save}>저장</button>
+              <button className="button button-save" onClick={saveAns}>
+                저장
+              </button>
             ) : (
               <>
-                <button className="btn btn-edit" onClick={edit}>수정</button>
+                <button className="button button-edit" onClick={editAns}>
+                  수정
+                </button>
                 {correct !== null && (
-                  <span className="check-indicator">
+                  <span className="indicator">
                     {correct ? '○ 정답입니다!' : '× 오답입니다.'}
                   </span>
                 )}

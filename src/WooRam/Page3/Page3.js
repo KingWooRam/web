@@ -1,28 +1,22 @@
 import React from 'react';
 import Content from './Content';
-import { style } from './styles/Page3.css';
 import { Link } from 'react-router-dom';
-import imageSrc1 from './styles/1.png';
-import imageSrc2 from './styles/2.png';
-
-
+import introImage from './styles/1.png';
+import outroImage from './styles/2.png';
+import './styles/Page3.css';
 
 function Page3() {
   return (
-
-    <div className="page-container">
-      <img src={imageSrc1} alt="신체활동 기준 기억하기" />
-      <p className="page-subtitle">
-        앞서 기억해 둔 <b style={{ color: 'red' }}>신체활동 기준</b>입니다. 빈칸을 채워보세요 (1~5)
+    <div className="container">
+      <img src={introImage} alt="신체활동 기준 설명 이미지" />
+      <p className="subtitle">
+        기억해 둔 <b style={{ color: 'red' }}>신체활동 기준</b>입니다. 빈칸을 채워보세요 (1~5)
       </p>
-
       <Content />
-      <img src={imageSrc2}></img><br></br>
+      <img src={outroImage} alt="퀴즈 힌트 이미지" /><br />
       <Link to="/Page2" style={{ marginRight: '10px' }}>이전</Link>
-      <Link to="/Page4" >다음</Link>
+      <Link to="/Page4">다음</Link>
     </div>
-
-
   );
 }
 

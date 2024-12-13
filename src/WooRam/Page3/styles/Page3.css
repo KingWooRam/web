@@ -1,21 +1,109 @@
-.page-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: 'Arial', sans-serif;
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.Content {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-item {
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.quiz-content {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.image-area img {
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+.form-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.text-area {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.input-field {
+  padding: 4px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.button {
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+.button-save {
+  background: #f0f0f0;
+}
+
+.button-save:hover {
+  background: #e0e0e0;
+}
+
+.button-edit {
+  background: #e8e8e8;
+}
+
+.button-edit:hover {
+  background: #d8d8d8;
+}
+
+.indicator {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
   }
-  
-  .page-title {
-    text-align: center;
-    color: #2c3e50;
-    font-size: 28px;
-    margin-bottom: 15px;
+
+  .Content {
+    padding: 10px;
+    border-radius: 4px;
   }
-  
-  .page-subtitle {
-    text-align: center;
-    color: #7f8c8d;
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-  
+}

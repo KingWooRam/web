@@ -1,88 +1,88 @@
 import React, { useState } from 'react';
 
 const Date = ({ onSave }) => {
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [day, setDay] = useState('');
-  const [weather, setWeather] = useState('');
-  const [isEditing, setIsEditing] = useState(true);
+  const [yr, setYr] = useState('');
+  const [mo, setMo] = useState('');
+  const [dy, setDy] = useState('');
+  const [wt, setWt] = useState('');
+  const [edit, setEdit] = useState(true);
 
-  const handleSave = () => {
-    setIsEditing(false);
+  const saveData = () => {
+    setEdit(false);
     if (onSave) {
       onSave({
-        date: `${year}년 ${month}월 ${day}일`,
-        weather,
+        date: `${yr}년 ${mo}월 ${dy}일`,
+        weather: wt,
       });
     }
   };
 
-  const handleEdit = () => setIsEditing(true);
+  const enableEdit = () => setEdit(true);
 
   return (
-    <div className="date-container">
-      <div className="date-input-container">
-        {isEditing ? (
+    <div className="date-box">
+      <div className="inputs">
+        {edit ? (
           <>
             <input
               type="text"
               placeholder="____"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              className="date-input year"
+              value={yr}
+              onChange={(e) => setYr(e.target.value)}
+              className="input"
             />
             <span>년</span>
             <input
               type="text"
               placeholder="__"
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-              className="date-input month"
+              value={mo}
+              onChange={(e) => setMo(e.target.value)}
+              className="input"
             />
             <span>월</span>
             <input
               type="text"
               placeholder="__"
-              value={day}
-              onChange={(e) => setDay(e.target.value)}
-              className="date-input day"
+              value={dy}
+              onChange={(e) => setDy(e.target.value)}
+              className="input"
             />
             <span>일</span>
           </>
         ) : (
           <span>
-            {year || '____'}년 {month || '__'}월 {day || '__'}일
+            {yr || '____'}년 {mo || '__'}월 {dy || '__'}일
           </span>
         )}
       </div>
-      <div className="weather-input-container">
+      <div className="weather-box">
         <span
-          className={`weather-icon ${weather === '맑음' ? 'selected' : ''}`}
-          onClick={() => isEditing && setWeather('맑음')}
+          className={`icon ${wt === '맑음' ? 'active' : ''}`}
+          onClick={() => edit && setWt('맑음')}
         >
           ☀️
         </span>
         <span
-          className={`weather-icon ${weather === '흐림' ? 'selected' : ''}`}
-          onClick={() => isEditing && setWeather('흐림')}
+          className={`icon ${wt === '흐림' ? 'active' : ''}`}
+          onClick={() => edit && setWt('흐림')}
         >
           ☁️
         </span>
         <span
-          className={`weather-icon ${weather === '비' ? 'selected' : ''}`}
-          onClick={() => isEditing && setWeather('비')}
+          className={`icon ${wt === '비' ? 'active' : ''}`}
+          onClick={() => edit && setWt('비')}
         >
           🌧️
         </span>
         <span
-          className={`weather-icon ${weather === '눈' ? 'selected' : ''}`}
-          onClick={() => isEditing && setWeather('눈')}
+          className={`icon ${wt === '눈' ? 'active' : ''}`}
+          onClick={() => edit && setWt('눈')}
         >
           ❄️
         </span>
       </div>
-      <button onClick={isEditing ? handleSave : handleEdit} className="save-button">
-        {isEditing ? '저장' : '수정'}
+      <button onClick={edit ? saveData : enableEdit} className="btn">
+        {edit ? '저장' : '수정'}
       </button>
     </div>
   );
