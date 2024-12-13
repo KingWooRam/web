@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function Box({ item }) {
   const blanks = (item.txt.match(/________/g) || []).length;
   const [ans, setAns] = useState(Array(blanks).fill(''));
-  const [edit, setEdit] = useState(true);
+  const [editable, setEditable] = useState(true);
   const [correct, setCorrect] = useState(null);
 
   const updAns = (e, idx) => {
@@ -20,19 +20,19 @@ function Box({ item }) {
 
     const isCorrect = ans.every((a, idx) => a.trim() === item.ans[idx]);
     setCorrect(isCorrect);
-    setEdit(false);
+    setEditable(false);
   };
 
-  const reset = () => {
-    setEdit(true);
+  const editBtn = () => {
+    setEditable(true);
     setCorrect(null);
   };
 
-  const render = (txt) => {
+  const renFields = (txt) => {
     const parts = txt.split('________');
     return parts.flatMap((part, idx) => [
       part,
-      idx < blanks && (edit ? (
+      idx < blanks && (editable ? (
         <input
           key={idx}
           type="text"
@@ -50,16 +50,20 @@ function Box({ item }) {
     <div className="q-box">
       <div className="q-content">
         <div className="q-img">
-          <img src={item.img} alt="활동" />
+          <img src={item.img} alt="활동 이미지" />
         </div>
         <div className="q-form">
-          <p className="q-txt">{render(item.txt)}</p>
+          <p className="q-txt">{renFields(item.txt)}</p>
           <div className="q-btns">
-            {edit ? (
-              <button className="btn save" onClick={save}>저장</button>
+            {editable ? (
+              <button className="btn save" onClick={save}>
+                저장
+              </button>
             ) : (
               <>
-                <button className="btn edit" onClick={reset}>수정</button>
+                <button className="btn edit" onClick={editBtn}>
+                  수정
+                </button>
                 {correct !== null && (
                   <span className="result">
                     {correct ? '○ 정답!' : '× 오답!'}

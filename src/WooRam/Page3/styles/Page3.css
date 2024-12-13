@@ -49,11 +49,13 @@
 }
 
 .btn.save {
-  background: #336e33;
+  background: #336e33; /* 수정: 더 진한 초록색 */
+  color: white;
 }
 
 .btn.edit {
-  background: #c47979;
+  background: #c47979; /* 수정: 더 부드러운 붉은색 */
+  color: white;
 }
 
 .result {
