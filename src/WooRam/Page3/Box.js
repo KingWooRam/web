@@ -1,87 +1,68 @@
 import React, { useState } from 'react';
 
 function Box({ item }) {
-  const blanks = (item.text.match(/________/g) || []).length;
-  const [answers, setAnswers] = useState(Array(blanks).fill(''));
-  const [editable, setEditable] = useState(true);
+  const blanks = (item.txt.match(/________/g) || []).length;
+  const [ans, setAns] = useState(Array(blanks).fill(''));
+  const [edit, setEdit] = useState(true);
   const [correct, setCorrect] = useState(null);
 
-  const updateAns = (e, idx) => {
-    const updated = [...answers];
+  const updAns = (e, idx) => {
+    const updated = [...ans];
     updated[idx] = e.target.value;
-    setAnswers(updated);
+    setAns(updated);
   };
 
-  const saveAns = () => {
-    if (answers.some((ans) => ans.trim() === '')) {
-      alert('모든 빈칸에 답을 입력하세요!');
+  const save = () => {
+    if (ans.some((a) => a.trim() === '')) {
+      alert('빈칸을 모두 채워주세요!');
       return;
     }
 
-    const allCorrect = answers.every(
-      (ans, idx) => ans.trim() === item.correctAnswers[idx]
-    );
-    setCorrect(allCorrect);
-    setEditable(false);
+    const isCorrect = ans.every((a, idx) => a.trim() === item.ans[idx]);
+    setCorrect(isCorrect);
+    setEdit(false);
   };
 
-  const editAns = () => {
-    setEditable(true);
+  const reset = () => {
+    setEdit(true);
     setCorrect(null);
   };
 
-  const renderFields = (text) => {
-    const parts = text.split('________');
-    const elements = [];
-
-    parts.forEach((part, idx) => {
-      elements.push(part);
-      if (idx < blanks) {
-        if (editable) {
-          elements.push(
-            <input
-              key={`input-${idx}`}
-              type="text"
-              value={answers[idx]}
-              onChange={(e) => updateAns(e, idx)}
-              className="input-field"
-              placeholder="답 입력"
-            />
-          );
-        } else {
-          elements.push(
-            <span key={`answer-${idx}`} className="input-field">
-              {answers[idx]}
-            </span>
-          );
-        }
-      }
-    });
-
-    return elements;
+  const render = (txt) => {
+    const parts = txt.split('________');
+    return parts.flatMap((part, idx) => [
+      part,
+      idx < blanks && (edit ? (
+        <input
+          key={idx}
+          type="text"
+          value={ans[idx]}
+          onChange={(e) => updAns(e, idx)}
+          className="input"
+        />
+      ) : (
+        <span key={idx} className="input">{ans[idx]}</span>
+      )),
+    ]);
   };
 
   return (
-    <div className="quiz-item">
-      <div className="quiz-content">
-        <div className="image-area">
-          <img src={item.imageSrc} alt="활동 이미지" />
+    <div className="q-box">
+      <div className="q-content">
+        <div className="q-img">
+          <img src={item.img} alt="활동" />
         </div>
-        <div className="form-area">
-          <p className="text-area">{renderFields(item.text)}</p>
-          <div className="action-buttons">
-            {editable ? (
-              <button className="button button-save" onClick={saveAns}>
-                저장
-              </button>
+        <div className="q-form">
+          <p className="q-txt">{render(item.txt)}</p>
+          <div className="q-btns">
+            {edit ? (
+              <button className="btn save" onClick={save}>저장</button>
             ) : (
               <>
-                <button className="button button-edit" onClick={editAns}>
-                  수정
-                </button>
+                <button className="btn edit" onClick={reset}>수정</button>
                 {correct !== null && (
-                  <span className="indicator">
-                    {correct ? '○ 정답입니다!' : '× 오답입니다.'}
+                  <span className="result">
+                    {correct ? '○ 정답!' : '× 오답!'}
                   </span>
                 )}
               </>

@@ -1,109 +1,62 @@
-.container {
-  padding: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-  font-family: 'Arial', sans-serif;
-}
-
-.title {
-  text-align: center;
-  color: #2c3e50;
-  font-size: 28px;
-  margin-bottom: 15px;
-}
-
-.subtitle {
-  text-align: center;
-  color: #7f8c8d;
-  font-size: 16px;
-  margin-bottom: 30px;
-}
-
-.Content {
-  background-color: #ecf0f1;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.quiz-item {
+.quiz {
   margin: 10px 0;
-  padding: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+.q-box {
+  margin: 10px 0;
   border-bottom: 1px solid #ddd;
 }
 
-.quiz-content {
+.q-content {
   display: flex;
   gap: 10px;
-  align-items: flex-start;
 }
 
-.image-area img {
-  width: 150px;
+.q-img img {
+  width: 100px;
   height: auto;
-  display: block;
 }
 
-.form-area {
+.q-form {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.text-area {
+.q-txt {
   margin: 0;
-  line-height: 1.4;
 }
 
-.input-field {
-  padding: 4px;
-  margin: 0 5px;
+.input {
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
+  padding: 5px;
 }
 
-.action-buttons {
+.q-btns {
   display: flex;
   gap: 5px;
 }
 
-.button {
-  padding: 4px 10px;
+.btn {
   border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 14px;
-  border-radius: 2px;
 }
 
-.button-save {
-  background: #f0f0f0;
+.btn.save {
+  background: #336e33;
 }
 
-.button-save:hover {
-  background: #e0e0e0;
+.btn.edit {
+  background: #c47979;
 }
 
-.button-edit {
-  background: #e8e8e8;
-}
-
-.button-edit:hover {
-  background: #d8d8d8;
-}
-
-.indicator {
-  margin-left: 10px;
+.result {
   font-weight: bold;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  .Content {
-    padding: 10px;
-    border-radius: 4px;
-  }
+  margin-left: 10px;
 }
