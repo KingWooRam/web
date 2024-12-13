@@ -16,9 +16,8 @@ function Page4() {
 
             <p className='PageNum' style={style.pageNum}>3</p>
 
-            <Link to={'/page3'}>p.3 이동</Link>
-            <Link to={'/page5'}>p.5 이동</Link>
-
+            <Link to="/page3" style={{ marginRight: '10px' }}>이전</Link>
+            <Link to="/page5">다음</Link>
         </div>
     );
 }
